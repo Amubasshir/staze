@@ -1,5 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
+import { IoMdClose } from 'react-icons/io';
+import Button from '../Button';
 
 interface ModalProps {
   isOpen?: boolean;
@@ -62,7 +64,57 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <>
-      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-800/70 outline-none focus:outline-none"></div>
+      <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-gray-800/70 outline-none focus:outline-none">
+        <div
+          className="
+        relative mx-auto my-6 h-full w-full md:h-auto md:w-4/6 lg:h-auto lg:w-3/6 xl:w-2/5
+        "
+        >
+          {/* content */}
+          <div
+            className={`
+          translate h-full duration-300 ${
+            showModal ? 'translate-y-0' : 'translate-y-full'
+          } ${showModal ? 'opacity100' : 'opacity-0'}
+          `}
+          >
+            <div
+              className="
+            translate relative flex h-full w-full flex-col rounded-lg border-0 bg-white outline-none focus:outline-none md:h-auto lg:h-auto
+            "
+            >
+              {/* modal header */}
+              <div
+                className="
+              -b-[1px] relative flex items-center justify-center rounded-t border p-6
+              "
+              >
+                <button
+                  onClick={handleClose}
+                  className="
+                p=1  absolute left-9 border-0 transition hover:opacity-70
+                "
+                >
+                  <IoMdClose size={18} />
+                </button>
+                <div className="text-lg font-semibold">{title}</div>
+              </div>
+              {/* modal body */}
+              <div className="relative flex-auto p-6">{body}</div>
+              {/* modal footer */}
+              <div className="flex flex-col gap-2 p-6">
+                <div
+                  className="
+                flex w-full flex-row items-center gap-4
+                "
+                >
+                  <Button label="My Buttonn" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
